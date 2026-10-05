@@ -1,0 +1,4083 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STYLE COMPASS ― パーソナル診断</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --black:#FFFFFF;
+  --tarmac:#F6F1EA;
+  --asphalt:#EDE5D8;
+  --line:#D9CEBD;
+  --chalk:#2B2622;
+  --dim:#7A6F63;
+  --tape:#2F6B57;
+  --accent-text:#2F6B57;
+  --press:#21503F;
+  --alert:#C0462B;
+  --sand:#F6F1EA;
+  --clay:#C8744F;
+
+  --display:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --body:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+
+  --tape-stripe:var(--tape);
+}
+
+*{box-sizing:border-box;}
+
+html,body{
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:var(--black);
+  color:var(--chalk);
+  font-family:var(--body);
+  font-weight:500;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:48px 18px 90px;
+  line-height:1.7;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+:focus-visible{
+  outline:3px solid var(--tape);
+  outline-offset:2px;
+}
+
+.stage{
+  width:100%;
+  max-width:720px;
+}
+
+/* ---------------- MASTHEAD ---------------- */
+
+.masthead{
+  text-align:left;
+  margin-bottom:30px;
+}
+
+.masthead h1{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(3rem,13vw,5.8rem);
+  line-height:.92;
+  letter-spacing:-.03em;
+  margin:0 0 16px;
+  animation:wordmark .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.masthead p{
+  margin:0;
+  font-size:.92rem;
+  color:var(--dim);
+}
+
+@keyframes wordmark{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .masthead h1{animation:none;}
+  *{transition:none !important;}
+}
+
+/* ---------------- CARD ---------------- */
+
+.card{
+  background:var(--tarmac);
+  color:var(--chalk);
+  border:1px solid var(--line);
+  border-radius:0;
+  padding:48px 36px 40px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:12px;
+  background:var(--tape-stripe);
+}
+
+/* ---------------- HOME ---------------- */
+
+.home{
+  text-align:left;
+}
+
+.home h2{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.9rem;
+  line-height:1.3;
+  margin:0 0 12px;
+}
+
+.home-lead{
+  color:var(--dim);
+  margin:0 0 30px;
+  max-width:520px;
+  font-size:.95rem;
+}
+
+.home-options{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.home-option{
+  display:grid;
+  grid-template-columns:60px 1fr 30px;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  text-align:left;
+  padding:20px;
+  border:1px solid var(--line);
+  background:var(--black);
+  color:var(--chalk);
+  cursor:pointer;
+  border-radius:0;
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+
+.home-option:hover{
+  background:var(--tape);
+  border-color:var(--tape);
+  color:#fff;
+}
+
+.home-icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  background:var(--tape);
+  color:#fff;
+  border-radius:0;
+  font-size:1.35rem;
+}
+
+.home-option:hover .home-icon{
+  background:#000;
+}
+
+.home-option h3{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.1rem;
+  margin:0 0 4px;
+}
+
+.home-option p{
+  margin:0;
+  font-size:.82rem;
+  color:var(--dim);
+}
+
+.home-option:hover p{
+  color:#fff;
+}
+
+.home-arrow{
+  font-size:1.5rem;
+  color:var(--accent-text);
+}
+
+.home-option:hover .home-arrow{
+  color:#fff;
+}
+
+.home-note{
+  margin:24px 0 0;
+  font-size:.78rem;
+  color:var(--dim);
+}
+
+/* ---------------- COMMON ---------------- */
+
+.quiz-nav{
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom:18px;
+}
+
+.back-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--dim);
+  padding:5px 0;
+}
+
+.back-btn:hover{
+  color:var(--accent-text);
+}
+
+.part-label{
+  font-size:.85rem;
+  color:var(--accent-text);
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.stitch-track{
+  display:flex;
+  gap:3px;
+  margin-bottom:8px;
+}
+
+.stitch{
+  flex:1;
+  height:8px;
+  background:var(--line);
+}
+
+.stitch.done{
+  background:var(--tape-stripe);
+}
+
+.progress-label{
+  font-size:.78rem;
+  color:var(--dim);
+  margin:0 0 28px;
+  text-align:right;
+}
+
+.question h2{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.35rem;
+  margin:0 0 26px;
+  line-height:1.55;
+}
+
+.options{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.option{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  padding:16px 18px;
+  background:var(--black);
+  border:1px solid var(--line);
+  border-radius:0;
+  cursor:pointer;
+  font-size:.96rem;
+  text-align:left;
+  color:var(--chalk);
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+
+.option:hover{
+  background:var(--tape);
+  border-color:var(--tape);
+  color:#fff;
+}
+
+.option:active{
+  transform:scale(.99);
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--line);
+  flex:0 0 auto;
+  margin-top:8px;
+}
+
+.option:hover .dot{
+  background:#000;
+}
+
+/* ---------------- GENDER ---------------- */
+
+.gender-options{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.gender-option{
+  padding:20px;
+  background:var(--black);
+  border:1px solid var(--line);
+  border-radius:0;
+  cursor:pointer;
+  font-size:1rem;
+  text-align:left;
+  color:var(--chalk);
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+
+.gender-option:hover{
+  background:var(--tape);
+  border-color:var(--tape);
+  color:#fff;
+}
+
+/* ---------------- INPUT ---------------- */
+
+.input-box{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.input-box label{
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--dim);
+}
+
+.input-box input{
+  width:100%;
+  padding:15px;
+  border:1px solid var(--line);
+  background:var(--black);
+  color:var(--chalk);
+  border-radius:0;
+  outline:none;
+}
+
+.input-box input:focus{
+  border-color:var(--tape);
+}
+
+.primary-btn{
+  margin-top:18px;
+  width:100%;
+  padding:16px 20px;
+  border:none;
+  background:var(--tape);
+  color:#fff;
+  cursor:pointer;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1rem;
+  border-radius:0;
+  transition:background .15s ease;
+}
+
+.primary-btn:hover{
+  background:var(--press);
+}
+
+/* ---------------- SWATCH ---------------- */
+
+.swatch-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.swatch-option{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  background:var(--black);
+  border:1px solid var(--line);
+  padding:14px 6px 10px;
+  color:var(--chalk);
+  transition:border-color .15s ease;
+}
+
+.swatch-option:hover{
+  border-color:var(--tape);
+}
+
+.swatch-circle{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:2px solid var(--line);
+  transition:transform .15s ease,border-color .15s ease;
+}
+
+.swatch-option:hover .swatch-circle{
+  transform:scale(1.1);
+  border-color:var(--tape);
+}
+
+.swatch-option span.label{
+  font-size:.76rem;
+  color:var(--dim);
+  text-align:center;
+}
+
+.swatch-option:hover span.label{
+  color:var(--chalk);
+}
+
+/* ---------------- PHOTO ---------------- */
+
+.photo-intro{
+  margin:-6px 0 24px;
+  color:var(--dim);
+  font-size:.92rem;
+}
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.photo-box{
+  background:var(--black);
+  border:1px solid var(--line);
+  padding:16px;
+}
+
+.photo-box h3{
+  font-family:var(--display);
+  font-weight:400;
+  margin:0 0 5px;
+  font-size:1rem;
+  line-height:1.4;
+}
+
+.photo-box p{
+  margin:0 0 14px;
+  color:var(--dim);
+  font-size:.78rem;
+}
+
+.photo-preview{
+  width:100%;
+  aspect-ratio:3/4;
+  background:var(--asphalt);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  margin-bottom:12px;
+  color:var(--dim);
+  font-size:.78rem;
+  text-align:center;
+}
+
+.photo-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.photo-actions{
+  display:flex;
+  gap:7px;
+  flex-direction:column;
+}
+
+.photo-btn{
+  display:block;
+  width:100%;
+  padding:11px;
+  background:var(--chalk);
+  color:#000;
+  border:1px solid var(--chalk);
+  cursor:pointer;
+  font-size:.8rem;
+  font-weight:700;
+  text-align:center;
+}
+
+.photo-btn:hover{
+  background:var(--tape);
+  border-color:var(--tape);
+  color:#fff;
+}
+
+.photo-btn.secondary{
+  background:transparent;
+  color:var(--chalk);
+  border-color:var(--line);
+}
+
+.photo-btn.secondary:hover{
+  background:var(--tape);
+  color:#fff;
+  border-color:var(--tape);
+}
+
+.photo-file{
+  display:none;
+}
+
+.photo-status{
+  margin-top:7px;
+  font-size:.74rem;
+  color:var(--accent-text);
+  min-height:18px;
+}
+
+.ai-note{
+  margin-top:18px;
+  padding:16px 18px;
+  background:var(--asphalt);
+  border:1px dashed var(--line);
+  font-size:.8rem;
+  color:var(--dim);
+}
+
+.ai-note strong{
+  color:var(--chalk);
+}
+
+/* ---------------- RESULT ---------------- */
+
+.result-name{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:2rem;
+  line-height:1.3;
+  margin:0 0 22px;
+}
+
+.chips{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
+}
+
+.chip{
+  padding:7px 12px;
+  border:1px solid var(--chalk);
+  font-size:.82rem;
+  font-weight:700;
+  background:transparent;
+  color:var(--chalk);
+}
+
+.section-block{
+  margin-bottom:34px;
+  padding-bottom:30px;
+  border-bottom:1px solid var(--line);
+}
+
+.section-block:last-of-type{
+  border-bottom:none;
+}
+
+.section-block h3{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.2rem;
+  line-height:1.4;
+  margin:0 0 10px;
+}
+
+.section-block p.desc{
+  margin:0 0 16px;
+  font-size:.92rem;
+  color:var(--dim);
+}
+
+.section-block h4{
+  font-size:.85rem;
+  color:var(--chalk);
+  margin:0 0 8px;
+  font-weight:700;
+}
+
+.section-block ul{
+  margin:0 0 16px;
+  padding-left:20px;
+}
+
+.section-block li{
+  margin-bottom:5px;
+}
+
+.palette{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.palette span{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:inline-block;
+  border:2px solid var(--line);
+}
+
+.bars{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.bar-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:.82rem;
+}
+
+.bar-label{
+  width:78px;
+  flex:0 0 auto;
+  color:var(--chalk);
+  font-weight:700;
+}
+
+.bar-track{
+  flex:1;
+  height:10px;
+  background:var(--line);
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+}
+
+.bar-pct{
+  width:36px;
+  text-align:right;
+  color:var(--dim);
+}
+
+/* 診断結果の見出しブロック：画面でいちばん大きな黄色 */
+
+.combo-box{
+  background:var(--tape);
+  color:#fff;
+  padding:28px 26px;
+  margin-bottom:34px;
+}
+
+.combo-box h3{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.3rem;
+  line-height:1.5;
+  margin:0 0 10px;
+}
+
+.combo-box p{
+  margin:0;
+  font-size:.93rem;
+  font-weight:700;
+  color:#F2F6FF;
+}
+
+/* ---------------- RECOMMEND ---------------- */
+
+.recommend-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.recommend-item{
+  background:var(--black);
+  border:1px solid var(--line);
+  padding:15px;
+}
+
+.recommend-item small{
+  display:block;
+  color:var(--dim);
+  font-size:.74rem;
+  margin-bottom:3px;
+}
+
+.recommend-item strong{
+  font-size:.92rem;
+}
+
+.photo-result{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
+
+.photo-result img{
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  background:var(--asphalt);
+  border:1px solid var(--line);
+}
+
+/* ---------------- SHOP ---------------- */
+
+.shop-block{
+  margin-top:10px;
+}
+
+.shop-block h3{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.2rem;
+  margin:0 0 6px;
+}
+
+.shop-block > p.desc{
+  margin:0 0 18px;
+  font-size:.92rem;
+  color:var(--dim);
+}
+
+.shop-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.shop-item:last-child{
+  border-bottom:none;
+}
+
+.shop-item-name{
+  font-size:.92rem;
+  font-weight:700;
+}
+
+.shop-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.shop-link{
+  font-size:.78rem;
+  font-weight:700;
+  text-decoration:none;
+  color:var(--chalk);
+  background:transparent;
+  border:1px solid var(--line);
+  padding:8px 12px;
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+
+.shop-link:hover{
+  background:var(--tape);
+  border-color:var(--tape);
+  color:#fff;
+}
+
+.shop-link.zozo{
+  background:var(--tape);
+  border-color:var(--tape);
+  color:#fff;
+}
+
+.shop-link.zozo:hover{
+  background:var(--press);
+  border-color:var(--press);
+}
+
+.restart{
+  display:inline-block;
+  margin-top:22px;
+  background:transparent;
+  color:var(--chalk);
+  border:1px solid var(--chalk);
+  padding:14px 26px;
+  font-size:.95rem;
+  font-weight:700;
+  border-radius:0;
+  cursor:pointer;
+  transition:background .15s ease,color .15s ease;
+}
+
+.restart:hover{
+  background:var(--tape);
+  color:#fff;
+}
+
+/* ---------------- ZOZO CTA / PRODUCTS ---------------- */
+
+.zozo-cta{
+  display:block;
+  margin:0 0 28px;
+  padding:18px 22px;
+  background:transparent;
+  color:var(--chalk);
+  text-decoration:none;
+  border:2px solid var(--tape);
+  transition:background .15s ease,color .15s ease;
+}
+
+.zozo-cta:hover{
+  background:var(--tape);
+  color:#fff;
+}
+
+.zozo-cta strong{
+  display:block;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.05rem;
+  line-height:1.5;
+  margin-bottom:3px;
+}
+
+.zozo-cta span{
+  font-size:.8rem;
+  color:var(--dim);
+}
+
+.zozo-cta:hover span{
+  color:#fff;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.product-card{
+  background:var(--black);
+  border:1px solid var(--line);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+}
+
+.product-card.pick{
+  border-color:var(--tape);
+}
+
+.product-kind{
+  font-size:.74rem;
+  color:var(--dim);
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.product-card.pick .product-kind{
+  color:var(--accent-text);
+}
+
+.product-brand{
+  font-size:.76rem;
+  color:var(--dim);
+  font-weight:700;
+}
+
+.product-name{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:.98rem;
+  line-height:1.5;
+  margin:2px 0 8px;
+}
+
+.product-why{
+  margin:0 0 14px;
+  font-size:.82rem;
+  color:var(--dim);
+  flex:1;
+}
+
+.color-hint{
+  margin:16px 0 0;
+  padding:14px 16px;
+  background:var(--asphalt);
+  border:1px dashed var(--line);
+  font-size:.82rem;
+  color:var(--dim);
+}
+
+/* ---------------- PHOTO ANALYSIS ---------------- */
+
+.api-box{
+  margin-top:14px;
+  font-size:.8rem;
+  color:var(--dim);
+}
+
+.api-box summary{
+  cursor:pointer;
+  font-weight:700;
+  color:var(--chalk);
+}
+
+.api-box input{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:1px solid var(--line);
+  background:var(--black);
+  color:var(--chalk);
+  border-radius:0;
+  outline:none;
+}
+
+.api-box input:focus{
+  border-color:var(--tape);
+}
+
+.api-box p{
+  margin:8px 0 0;
+  color:var(--dim);
+  font-size:.76rem;
+}
+
+.loading-box{
+  padding:50px 0;
+}
+
+.spinner{
+  width:42px;
+  height:42px;
+  margin:0 0 22px;
+  border:5px solid var(--line);
+  border-top-color:var(--tape);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+.loading-box h2{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.25rem;
+  margin:0 0 8px;
+}
+
+.loading-box p{
+  margin:0;
+  font-size:.88rem;
+  color:var(--dim);
+}
+
+.error-box{
+  background:var(--asphalt);
+  border:1px solid var(--line);
+  border-left:6px solid var(--alert);
+  padding:16px 18px;
+  font-size:.9rem;
+  margin:0 0 18px;
+}
+
+.gender-toggle{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin:0 0 26px;
+  font-size:.82rem;
+  font-weight:700;
+}
+
+.toggle-btn{
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--chalk);
+  padding:8px 14px;
+  font-size:.8rem;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.toggle-btn:hover{
+  border-color:var(--tape);
+}
+
+.toggle-btn.active{
+  background:var(--tape);
+  color:#fff;
+  border-color:var(--tape);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width:520px){
+
+  body{
+    padding:30px 12px 60px;
+  }
+
+  .card{
+    padding:40px 20px 30px;
+  }
+
+  .photo-grid,
+  .recommend-grid,
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .swatch-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .home-option{
+    grid-template-columns:48px 1fr 22px;
+    padding:16px;
+    gap:12px;
+  }
+
+  .home-icon{
+    width:44px;
+    height:44px;
+  }
+
+  .result-name{
+    font-size:1.55rem;
+  }
+
+  .shop-item{
+    align-items:flex-start;
+  }
+
+}
+
+
+/* ================= THEME OVERRIDE: Print / Catalogue ================= */
+body{background:var(--sand);color:var(--chalk);padding-top:56px;}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px;}
+
+/* ヘッダー：左寄せ、細い罫線 */
+.masthead{
+  text-align:left;
+  margin-bottom:0;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--chalk);
+}
+.masthead h1{
+  font-weight:800;
+  font-size:clamp(2.2rem,9vw,3.4rem);
+  line-height:1.05;
+  letter-spacing:.04em;
+  margin:0 0 10px;
+}
+.masthead p{font-size:.82rem;letter-spacing:.1em;color:var(--dim);}
+
+/* カード枠をなくし、紙面に直接載せる */
+.card{
+  background:transparent;
+  border:none;
+  border-radius:0;
+  box-shadow:none;
+  padding:36px 0 0;
+}
+.card::before{display:none;}
+
+.home h2,.question h2,.result-name,.section-block h3,.shop-block h3,
+.home-option h3,.photo-box h3,.product-name,.combo-box h3,
+.zozo-cta strong,.loading-box h2{font-weight:700;letter-spacing:.02em;}
+.question h2{font-size:1.5rem;}
+
+/* 選択肢：罫線で区切るリスト＋連番 */
+.options,.gender-options,.home-options{gap:0;border-top:1px solid var(--chalk);}
+.options{counter-reset:opt;}
+.gender-options{counter-reset:opt;}
+.option,.gender-option,.home-option{
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  box-shadow:none;
+  padding:18px 6px;
+  transition:background .15s ease,padding .15s ease,color .15s ease;
+}
+.option,.gender-option{counter-increment:opt;display:flex;gap:18px;align-items:baseline;}
+.option::before,.gender-option::before{
+  content:counter(opt,decimal-leading-zero);
+  font-family:var(--display);
+  font-size:.85rem;
+  color:var(--clay);
+  flex:0 0 auto;
+}
+.dot{display:none;}
+.option:hover,.gender-option:hover,.home-option:hover{
+  background:var(--tape);
+  color:#fff;
+  padding-left:16px;
+  transform:none;
+  box-shadow:none;
+}
+.option:hover::before,.gender-option:hover::before{color:#fff;}
+
+/* ホーム：絵文字アイコンを章番号に */
+.home-option{grid-template-columns:56px 1fr 24px;}
+.home-icon{
+  background:transparent;
+  color:var(--clay);
+  font-size:0;
+  width:auto;height:auto;
+  display:block;
+}
+.home-icon::after{
+  font-family:var(--display);
+  font-size:1.6rem;
+  font-weight:700;
+}
+#photo-mode .home-icon::after{content:"01";}
+#question-mode .home-icon::after{content:"02";}
+.home-option:hover .home-icon{background:transparent;color:#fff;}
+.home-arrow{color:var(--chalk);}
+
+/* 進行バー：細い線 */
+.stitch{height:3px;border-radius:0;}
+.stitch.done{background:var(--tape);}
+.part-label{letter-spacing:.08em;color:var(--clay);}
+
+/* 入力：下線スタイル */
+.input-box input,.api-box input{
+  background:transparent;
+  border:none;
+  border-bottom:1.5px solid var(--chalk);
+  border-radius:0;
+  padding:12px 2px;
+  font-size:1.1rem;
+}
+.input-box input:focus{border-bottom-color:var(--tape);}
+
+/* ボタン：フラットな長方形 */
+.primary-btn{
+  border-radius:0;
+  box-shadow:none;
+  letter-spacing:.1em;
+  font-weight:700;
+}
+.photo-btn{
+  background:var(--chalk);
+  border-color:var(--chalk);
+  color:#fff;
+  border-radius:0;
+}
+.photo-btn:hover{background:var(--tape);border-color:var(--tape);}
+.photo-btn.secondary{background:transparent;color:var(--chalk);border-color:var(--chalk);}
+.photo-btn.secondary:hover{background:var(--tape);color:#fff;border-color:var(--tape);}
+.restart{
+  border-radius:0;
+  border:1px solid var(--chalk);
+  color:var(--chalk);
+  letter-spacing:.08em;
+}
+.restart:hover{background:var(--chalk);color:#fff;}
+
+/* カラースウォッチ：四角いチップ */
+.swatch-grid{gap:0;border-top:1px solid var(--chalk);border-left:1px solid var(--line);}
+.swatch-option{
+  background:transparent;
+  border:none;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  padding:16px 6px 12px;
+}
+.swatch-option:hover{background:#fff;}
+.swatch-circle{border-radius:0;width:44px;height:44px;border:1px solid rgba(0,0,0,.15);}
+.swatch-option:hover .swatch-circle{transform:none;border-color:var(--chalk);}
+
+/* 写真・商品カード：細い罫線のみ */
+.photo-box,.recommend-item,.product-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:0;
+  box-shadow:none;
+}
+.photo-preview,.photo-result img{border-radius:0;}
+.ai-note,.color-hint{
+  background:transparent;
+  border:none;
+  border-left:3px solid var(--clay);
+  border-radius:0;
+  padding:4px 0 4px 16px;
+}
+.product-card.pick{border:1px solid var(--clay);background:#fff;}
+.product-card.pick .product-kind{color:var(--clay);}
+.product-kind{letter-spacing:.06em;}
+
+/* 結果 */
+.result-name{font-size:2.1rem;}
+.chips{gap:0;border-top:1px solid var(--chalk);border-bottom:1px solid var(--line);}
+.chip{
+  border:none;
+  border-right:1px solid var(--line);
+  border-radius:0;
+  background:transparent;
+  color:var(--chalk);
+  padding:9px 14px 9px 0;
+  margin-right:14px;
+}
+.chip:last-child{border-right:none;}
+.combo-box{
+  background:var(--tape);
+  border-radius:0;
+  padding:30px 28px;
+  border-top:6px solid var(--clay);
+}
+.section-block{border-bottom:1px solid var(--line);}
+.bar-track{border-radius:0;height:6px;background:var(--asphalt);}
+.bar-fill{border-radius:0;}
+.palette{gap:0;}
+.palette span{border-radius:0;width:48px;height:48px;border:none;box-shadow:none;}
+
+/* リンク */
+.shop-link,.toggle-btn{border-radius:0;border-color:var(--chalk);}
+.shop-link.zozo{background:var(--tape);border-color:var(--tape);}
+.shop-link:hover,.toggle-btn:hover{background:var(--chalk);border-color:var(--chalk);color:#fff;}
+.shop-link.zozo:hover{background:var(--press);border-color:var(--press);}
+.toggle-btn.active{background:var(--chalk);border-color:var(--chalk);}
+.zozo-cta{
+  border-radius:0;
+  background:transparent;
+  border:none;
+  border-top:1px solid var(--chalk);
+  border-bottom:1px solid var(--chalk);
+  padding:18px 4px;
+}
+.zozo-cta:hover{background:var(--tape);padding-left:16px;}
+.error-box{background:#fff;border-radius:0;border:1px solid var(--line);border-left:5px solid var(--alert);}
+.spinner{border-top-color:var(--clay);}
+
+</style>
+</head>
+
+<body>
+
+<div class="stage">
+
+  <div class="masthead">
+    <h1>STYLE<br>COMPASS</h1>
+    <p>あなたに似合うスタイルを見つけるパーソナル診断</p>
+  </div>
+
+  <div class="card" id="card"></div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   TYPE DATA
+========================================================= */
+
+const COLOR_TYPES = {
+
+  spring:{
+    name:"スプリング",
+    barColor:"#2F6B57",
+    desc:"明るく澄んだ黄みよりの配色が得意なタイプ。フレッシュで軽やかな色が肌を明るく見せます。",
+    palette:["#FF8C7A","#F0B429","#B7D28D","#FFF7E6"]
+  },
+
+  summer:{
+    name:"サマー",
+    barColor:"#2F6B57",
+    desc:"柔らかく涼しげな配色が得意なタイプ。澄んだパステルカラーが肌になじみます。",
+    palette:["#B9A6DA","#AFCBE3","#E8B4C0","#D9D6CE"]
+  },
+
+  autumn:{
+    name:"オータム",
+    barColor:"#2F6B57",
+    desc:"深みのある落ち着いた配色が得意なタイプ。こっくりとしたアースカラーが肌を引き立てます。",
+    palette:["#A0522D","#6B6B3A","#B5651D","#E0C097"]
+  },
+
+  winter:{
+    name:"ウィンター",
+    barColor:"#2F6B57",
+    desc:"はっきりとした鮮やかな配色が得意なタイプ。コントラストの強い色が肌を華やかに見せます。",
+    palette:["#C81E3A","#046A38","#1B1914","#FFFFFF"]
+  }
+
+};
+
+
+const SKELETON_TYPES = {
+
+  straight:{
+    name:"ストレート",
+    barColor:"#2F6B57",
+    desc:"上半身に程よい厚みがあるすっきりとした骨格。シンプルなIラインやハリのある素材が得意です。",
+    items:[
+      "Vネックのシンプルなトップス",
+      "ハイウエストのストレートパンツ",
+      "ハリのあるジャケット"
+    ]
+  },
+
+  wave:{
+    name:"ウェーブ",
+    barColor:"#2F6B57",
+    desc:"華奢で曲線的な骨格。柔らかく薄い素材や、ウエストを絞ったデザインが得意です。",
+    items:[
+      "柔らかい素材のブラウス",
+      "ハイウエストのフレアスカート",
+      "華奢なパンプス"
+    ]
+  },
+
+  natural:{
+    name:"ナチュラル",
+    barColor:"#2F6B57",
+    desc:"骨や関節がしっかりして手足が長く見える骨格。ラフでボリュームのある素材が得意です。",
+    items:[
+      "麻や厚手コットンのゆったりトップス",
+      "ワイドパンツ",
+      "無造作なレイヤードスタイル"
+    ]
+  }
+
+};
+
+
+const TASTE_TYPES = {
+
+  casual:{
+    name:"カジュアル",
+    barColor:"#2F6B57",
+    desc:"Tシャツやデニム、パーカーなどシンプルでラフなスタイルが心地いいタイプ。動きやすさと着慣れた雰囲気を大切にします。",
+    items:[
+      {name:"定番Tシャツ",category:"tops"},
+      {name:"洗いざらしのデニム",category:"pants"},
+      {name:"フード付きパーカー",category:"tops"}
+    ]
+  },
+
+  clean:{
+    name:"きれいめ",
+    barColor:"#2F6B57",
+    desc:"シャツやブラウス、ローファーなど、きれいめな素材感のスタイルが得意なタイプ。上品さと清潔感を大切にします。",
+    items:[
+      {name:"張りのあるシャツ",category:"tops"},
+      {name:"上質なブラウス",category:"tops"},
+      {name:"レザーローファー",category:"shoes"}
+    ]
+  },
+
+  street:{
+    name:"ストリート",
+    barColor:"#2F6B57",
+    desc:"オーバーサイズや黒・モノトーン基調、少し個性的なデザインが好きなタイプ。存在感のあるシルエットを楽しみます。",
+    items:[
+      {name:"ビッグシルエットのアウター",category:"jacket-outerwear"},
+      {name:"モノトーンのセットアップ",category:"suit"},
+      {name:"個性的なスニーカー",category:"shoes"}
+    ]
+  },
+
+  vintage:{
+    name:"古着系",
+    barColor:"#2F6B57",
+    desc:"古着ならではの一点物の魅力を楽しむタイプ。年代を感じさせるデザインやリペア感のある風合いを大切にします。",
+    items:[
+      {name:"ヴィンテージデニム",category:"pants"},
+      {name:"レトロ柄のシャツ",category:"tops"},
+      {name:"年代物のアクセサリー",category:"accessory"}
+    ]
+  }
+
+};
+
+
+/* =========================================================
+   ACCESSORY DATA
+========================================================= */
+
+const ACCESSORY_TYPES = {
+
+  necklace:{
+    title:"ネックレス",
+    options:[
+      "つけない",
+      "細めのチェーン",
+      "小さめのペンダント",
+      "パール・上品系",
+      "シルバーチェーン",
+      "ゴールドチェーン",
+      "太め・存在感のあるチェーン",
+      "ビンテージ・古着系"
+    ]
+  },
+
+  ring:{
+    title:"指輪",
+    options:[
+      "つけない",
+      "細いリング",
+      "シンプルなシルバーリング",
+      "ゴールドリング",
+      "大きめ・存在感のあるリング",
+      "複数のリングを重ねづけ",
+      "天然石・カラーストーン",
+      "ビンテージリング"
+    ]
+  },
+
+  piercing:{
+    title:"ピアス・イヤリング",
+    options:[
+      "つけない",
+      "小さなスタッド",
+      "小さなフープ",
+      "大きめフープ",
+      "揺れるタイプ",
+      "パール",
+      "個性的・デザイン系",
+      "ビンテージ系"
+    ]
+  },
+
+  bracelet:{
+    title:"ブレスレット・腕時計",
+    options:[
+      "つけない",
+      "細いブレスレット",
+      "シンプルな腕時計",
+      "メタルウォッチ",
+      "レザーベルト",
+      "太めブレスレット",
+      "重ねづけ",
+      "ビンテージウォッチ"
+    ]
+  },
+
+  bag:{
+    title:"バッグ",
+    options:[
+      "持たない・最低限",
+      "小さめショルダーバッグ",
+      "トートバッグ",
+      "リュック",
+      "ボディバッグ",
+      "ハンドバッグ",
+      "大きめバッグ",
+      "ビンテージバッグ"
+    ]
+  },
+
+  shoes:{
+    title:"靴",
+    options:[
+      "スニーカー",
+      "ローファー",
+      "パンプス",
+      "ブーツ",
+      "サンダル",
+      "厚底・ボリュームシューズ",
+      "革靴",
+      "ビンテージ系シューズ"
+    ]
+  }
+
+};
+
+
+/* =========================================================
+   SHOP KEYWORDS
+========================================================= */
+
+const COLOR_KEYWORD = {
+  spring:"コーラルピンク",
+  summer:"ラベンダー",
+  autumn:"テラコッタ",
+  winter:"エメラルドグリーン"
+};
+
+
+/* =========================================================
+   SHOP LINKS / PRODUCT CATALOG
+========================================================= */
+
+const ZOZO_SEARCH="https://zozo.jp/search/?p_keyv=";
+const RAKUTEN_SEARCH="https://search.rakuten.co.jp/search/mall/";
+
+/* ZOZOTOWNのWeb検索はキーワードをShift_JISで受け取るため、
+   ブラウザのTextDecoderから逆引き表を作ってエンコードする */
+
+let SJIS_MAP=null;
+
+function buildSjisMap(){
+
+  const map=new Map();
+  const dec=new TextDecoder("shift_jis");
+
+  /* 半角カナ */
+  for(let b=0xA1;b<=0xDF;b++){
+    map.set(dec.decode(new Uint8Array([b])),[b]);
+  }
+
+  /* 2バイト文字 */
+  const leads=[];
+  for(let l=0x81;l<=0x9F;l++) leads.push(l);
+  for(let l=0xE0;l<=0xFC;l++) leads.push(l);
+
+  leads.forEach(l=>{
+    for(let t=0x40;t<=0xFC;t++){
+      if(t===0x7F) continue;
+      const ch=dec.decode(new Uint8Array([l,t]));
+      if(ch.length===1 && ch!=="\uFFFD" && !map.has(ch)){
+        map.set(ch,[l,t]);
+      }
+    }
+  });
+
+  return map;
+
+}
+
+function encodeShiftJis(str){
+
+  if(!SJIS_MAP) SJIS_MAP=buildSjisMap();
+
+  let out="";
+
+  for(const ch of str){
+
+    if(/^[A-Za-z0-9\-_.~]$/.test(ch)){
+      out+=ch;
+    }else if(ch.charCodeAt(0)<0x80){
+      out+=encodeURIComponent(ch).replace(/[!'()*]/g,
+        c=>"%"+c.charCodeAt(0).toString(16).toUpperCase());
+    }else if(SJIS_MAP.has(ch)){
+      SJIS_MAP.get(ch).forEach(b=>{
+        out+="%"+b.toString(16).toUpperCase().padStart(2,"0");
+      });
+    }
+
+  }
+
+  return out;
+
+}
+
+function zozoUrl(q){
+
+  try{
+    return ZOZO_SEARCH+encodeShiftJis(q);
+  }catch(e){
+    /* 非対応ブラウザ用の保険 */
+    return ZOZO_SEARCH+encodeURIComponent(q);
+  }
+
+}
+
+function rakutenUrl(q){
+  return RAKUTEN_SEARCH+encodeURIComponent(q)+"/";
+}
+
+const TASTE_SEARCH_WORD = {
+  casual:"カジュアル",
+  clean:"きれいめ",
+  street:"ストリート",
+  vintage:"古着"
+};
+
+/* q = 検索ワード（性別は自動で付与）*/
+
+const STREET_ITEMS = [
+  {kind:"アウター",brand:"THE NORTH FACE",name:"ヌプシジャケット",why:"ボリュームのあるダウンで、ストリートの主役になる一着。",q:"THE NORTH FACE ヌプシジャケット"},
+  {kind:"トップス",brand:"STUSSY",name:"ロゴTシャツ",why:"ロゴ入りの定番。モノトーンでも一気にストリート感が出ます。",q:"STUSSY ロゴ Tシャツ"},
+  {kind:"ボトムス",brand:"Dickies",name:"874 ワークパンツ",why:"ゆったりシルエットで合わせやすい、ワークウェアの名作。",q:"Dickies 874 ワークパンツ"},
+  {kind:"シューズ",brand:"NIKE",name:"エアフォース1",why:"ボリュームのある白スニーカーで足元に存在感を。",q:"NIKE エアフォース1"}
+];
+
+const VINTAGE_ITEMS = [
+  {kind:"ボトムス",brand:"Levi's",name:"501 ヴィンテージ加工",why:"古着デニムの王道。色落ちの風合いが主役になります。",q:"Levi's 501 ヴィンテージ"},
+  {kind:"トップス",brand:"Wrangler",name:"ウエスタンシャツ",why:"レトロな柄とヨークデザインで、一枚で古着らしい雰囲気に。",q:"Wrangler ウエスタンシャツ"},
+  {kind:"シューズ",brand:"Dr.Martens",name:"1460 8ホールブーツ",why:"履き込むほど味が出る、古着コーデの定番ブーツ。",q:"Dr.Martens 1460 8ホール"},
+  {kind:"小物",brand:"Ray-Ban",name:"ウェイファーラー",why:"年代を感じさせるサングラスで、手軽にヴィンテージ感をプラス。",q:"Ray-Ban ウェイファーラー"}
+];
+
+const PRODUCTS = {
+
+  casual:{
+    women:[
+      {kind:"トップス",brand:"Champion",name:"リバースウィーブ スウェット",why:"厚手で型崩れしにくい定番スウェット。デニムと好相性。",q:"Champion リバースウィーブ スウェット"},
+      {kind:"トップス",brand:"Hanes",name:"BEEFY-T ポケットTシャツ",why:"肉厚コットンで一枚でもさまになる、無地Tの代表格。",q:"Hanes ビーフィー Tシャツ"},
+      {kind:"ボトムス",brand:"Levi's",name:"501 クロップド",why:"ストレートで洗いざらしの雰囲気が出せる定番デニム。",q:"Levi's 501 クロップド"},
+      {kind:"シューズ",brand:"adidas",name:"スタンスミス",why:"白のレザースニーカーで、カジュアルな装いを程よく整えます。",q:"adidas スタンスミス"}
+    ],
+    men:[
+      {kind:"トップス",brand:"Champion",name:"リバースウィーブ スウェットパーカー",why:"着込むほど馴染む、フード付きパーカーの定番。",q:"Champion リバースウィーブ パーカー"},
+      {kind:"トップス",brand:"Hanes",name:"BEEFY-T ポケットTシャツ",why:"肉厚コットンで透けにくく、一枚着にもインナーにも。",q:"Hanes ビーフィー Tシャツ"},
+      {kind:"ボトムス",brand:"Levi's",name:"501",why:"洗いざらしの雰囲気が出る、ストレートデニムの原点。",q:"Levi's 501"},
+      {kind:"シューズ",brand:"New Balance",name:"574",why:"クセがなく合わせやすい、カジュアルの鉄板スニーカー。",q:"New Balance 574"}
+    ]
+  },
+
+  clean:{
+    women:[
+      {kind:"トップス",brand:"UNIQLO",name:"レーヨンブラウス",why:"とろみのある素材で上品さと清潔感が出ます。",q:"ユニクロ レーヨンブラウス"},
+      {kind:"アウター",brand:"UNIQLO",name:"感動ジャケット",why:"軽くて伸びる素材。オンオフ問わずきれいめを作れます。",q:"ユニクロ 感動ジャケット"},
+      {kind:"ボトムス",brand:"UNIQLO",name:"スマートアンクルパンツ",why:"すっきり見えるシルエットで、ローファーとも好相性。",q:"ユニクロ スマートアンクルパンツ"},
+      {kind:"シューズ",brand:"REGAL",name:"コインローファー",why:"きちんと感のある定番ローファー。長く履ける一足です。",q:"REGAL コインローファー"}
+    ],
+    men:[
+      {kind:"トップス",brand:"UNIQLO",name:"オックスフォードシャツ",why:"張りのある生地で、清潔感のあるきれいめの基本に。",q:"ユニクロ オックスフォードシャツ"},
+      {kind:"アウター",brand:"UNIQLO",name:"感動ジャケット",why:"軽くて動きやすく、シャツやニットと合わせやすい一着。",q:"ユニクロ 感動ジャケット"},
+      {kind:"ボトムス",brand:"UNIQLO",name:"感動パンツ",why:"きれいなシルエットなのに楽。毎日使えるスラックス。",q:"ユニクロ 感動パンツ"},
+      {kind:"シューズ",brand:"REGAL",name:"コインローファー",why:"上品さを足元から整えてくれる定番のレザーシューズ。",q:"REGAL コインローファー"}
+    ]
+  },
+
+  street:{
+    women:STREET_ITEMS,
+    men:STREET_ITEMS
+  },
+
+  vintage:{
+    women:VINTAGE_ITEMS,
+    men:VINTAGE_ITEMS
+  }
+
+};
+
+/* 骨格タイプ別のおすすめ一着 */
+
+const SKELETON_PICKS = {
+  straight:{
+    women:{brand:"UNIQLO",name:"カシミヤVネックセーター",why:"Vネックが首元をすっきり見せ、ハリのある素材がストレートの強みを活かします。",q:"ユニクロ カシミヤ Vネック セーター"},
+    men:{brand:"UNIQLO",name:"カシミヤVネックセーター",why:"Vネックが首元をすっきり見せ、ハリのある素材がストレートの強みを活かします。",q:"ユニクロ カシミヤ Vネック セーター"}
+  },
+  wave:{
+    women:{brand:"UNIQLO",name:"シフォンプリーツスカート",why:"柔らかく軽い素材とウエスト位置の高さが、ウェーブの華奢さを引き立てます。",q:"ユニクロ シフォンプリーツスカート"},
+    men:{brand:"UNIQLO",name:"エクストラファインメリノセーター",why:"薄手で柔らかいニットが、ウェーブの体型になじみやすい一枚です。",q:"ユニクロ エクストラファインメリノ セーター"}
+  },
+  natural:{
+    women:{brand:"UNIQLO",name:"プレミアムリネンシャツ",why:"ラフな風合いとゆとりのあるシルエットが、ナチュラルの骨格にぴったり。",q:"ユニクロ プレミアムリネンシャツ"},
+    men:{brand:"UNIQLO",name:"プレミアムリネンシャツ",why:"ラフな風合いとゆとりのあるシルエットが、ナチュラルの骨格にぴったり。",q:"ユニクロ プレミアムリネンシャツ"}
+  }
+};
+
+/* 選んだ色（「その他」は検索に使わない） */
+
+function pickedColor(){
+  return (preferredColor && preferredColor!=="その他")
+    ? preferredColor
+    : null;
+}
+
+function genderPrefix(){
+  return (gender==="メンズ" || gender==="レディース") ? gender : "";
+}
+
+function productCardHtml(p,prefix,pick){
+
+  const query=[prefix,p.q].filter(Boolean).join(" ");
+
+  const kind=
+    (gender==="指定しない" && prefix)
+      ? `${p.kind} ／ ${prefix}`
+      : p.kind;
+
+  return `
+
+    <div class="product-card${pick?" pick":""}">
+
+      <small class="product-kind">${kind}</small>
+
+      ${p.brand ? `<div class="product-brand">${p.brand}</div>` : ""}
+
+      <div class="product-name">${p.name}</div>
+
+      <p class="product-why">${p.why}</p>
+
+      <div class="shop-links">
+
+        <a
+          class="shop-link zozo"
+          href="${zozoUrl(query)}"
+          target="_blank"
+          rel="noopener"
+        >
+          ZOZOTOWNで見る
+        </a>
+
+        ${
+          pickedColor()
+          ? `<a
+              class="shop-link"
+              href="${zozoUrl(query+" "+pickedColor())}"
+              target="_blank"
+              rel="noopener"
+            >
+              ${pickedColor()}で探す
+            </a>`
+          : ""
+        }
+
+        <a
+          class="shop-link"
+          href="${rakutenUrl(query)}"
+          target="_blank"
+          rel="noopener"
+        >
+          楽天で探す
+        </a>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function createProductCards(tasteKey,skeletonKey,skeletonName){
+
+  const set=PRODUCTS[tasteKey];
+
+  const cards=[];
+
+  if(gender==="メンズ"){
+
+    set.men.forEach(p=>cards.push(productCardHtml(p,"メンズ")));
+
+  }else if(gender==="レディース"){
+
+    set.women.forEach(p=>cards.push(productCardHtml(p,"レディース")));
+
+  }else{
+
+    set.women.slice(0,2).forEach(p=>cards.push(productCardHtml(p,"レディース")));
+    set.men.slice(0,2).forEach(p=>cards.push(productCardHtml(p,"メンズ")));
+
+  }
+
+  /* 骨格に合う一着 */
+
+  const picks=SKELETON_PICKS[skeletonKey];
+
+  if(gender==="メンズ"){
+
+    cards.push(productCardHtml(
+      {...picks.men,kind:`骨格${skeletonName}に合う一着`},
+      "メンズ",
+      true
+    ));
+
+  }else if(gender==="レディース"){
+
+    cards.push(productCardHtml(
+      {...picks.women,kind:`骨格${skeletonName}に合う一着`},
+      "レディース",
+      true
+    ));
+
+  }else{
+
+    cards.push(productCardHtml(
+      {...picks.women,kind:`骨格${skeletonName}に合う一着`},
+      "レディース",
+      true
+    ));
+
+    cards.push(productCardHtml(
+      {...picks.men,kind:`骨格${skeletonName}に合う一着`},
+      "メンズ",
+      true
+    ));
+
+  }
+
+  return cards.join("");
+
+}
+
+
+/* =========================================================
+   GENDER
+========================================================= */
+
+const GENDER_OPTIONS = [
+  {key:"レディース",t:"レディース"},
+  {key:"メンズ",t:"メンズ"},
+  {key:"指定しない",t:"指定しない（男女問わず見る）"}
+];
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+const SECTIONS = [
+
+  {
+    key:"basic",
+    label:"PART 1 ― 基本情報",
+    questions:[
+
+      {
+        type:"age",
+        q:"年齢を教えてください"
+      }
+
+    ]
+  },
+
+
+  {
+    key:"color",
+    label:"PART 2 ― パーソナルカラー診断",
+    questions:[
+
+      {
+        type:"choice",
+        q:"心惹かれる季節はどれですか？",
+        options:[
+          {t:"新緑がまぶしい春",s:{spring:2}},
+          {t:"澄みわたる夏の空",s:{summer:2}},
+          {t:"実りの深まる秋",s:{autumn:2}},
+          {t:"凛とした冬の空気",s:{winter:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"自分の肌の質感は、イエベ・ブルベどちらだと思いますか？",
+        options:[
+          {t:"イエベ（黄み・温かみのある肌）だと思う",s:{spring:1,autumn:1}},
+          {t:"ブルベ（青み・涼しげな肌）だと思う",s:{summer:1,winter:1}},
+          {t:"正直よくわからない",s:{}}
+        ]
+      },
+
+      {
+        type:"swatch",
+        pref:true,
+        q:"普段よく選ぶ色、またはこれから買いたい色を選んでください",
+        options:[
+          {t:"ホワイト",color:"#FFFFFF",s:{}},
+          {t:"ブラック",color:"#1B1914",s:{}},
+          {t:"グレー",color:"#8E8E8E",s:{}},
+          {t:"ブラウン",color:"#7B4A2D",s:{}},
+          {t:"ベージュ",color:"#D8C3A0",s:{}},
+          {t:"グリーン",color:"#3E8E4F",s:{}},
+          {t:"ブルー",color:"#2F6FC4",s:{}},
+          {t:"パープル",color:"#7D4FA8",s:{}},
+          {t:"イエロー",color:"#F2D338",s:{}},
+          {t:"ピンク",color:"#F08CAB",s:{}},
+          {t:"レッド",color:"#D0262F",s:{}},
+          {t:"オレンジ",color:"#F08A24",s:{}},
+          {t:"シルバー",color:"#C0C0C0",bg:"linear-gradient(135deg,#f5f5f5,#b5b5b5 50%,#e8e8e8)",s:{}},
+          {t:"ゴールド",color:"#D4AF37",bg:"linear-gradient(135deg,#f6e27a,#c9a227 50%,#f1d77a)",s:{}},
+          {t:"その他",color:"#ddd",bg:"conic-gradient(#e05a5a,#f2c14e,#6fbf73,#4a90d9,#a06cd5,#e05a5a)",s:{}}
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    key:"skeleton",
+    label:"PART 3 ― 骨格診断",
+    questions:[
+
+      {
+        type:"choice",
+        q:"肩まわりの特徴に近いのは？",
+        options:[
+          {t:"いかり肩気味で、厚みを感じる",s:{straight:2}},
+          {t:"丸みがあり、なで肩気味",s:{wave:2}},
+          {t:"肩幅が広く、しっかりして見える",s:{natural:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"ウエストの位置や特徴に近いのは？",
+        options:[
+          {t:"位置が高めで、くびれは分かりにくい",s:{straight:2}},
+          {t:"位置が低めで、くびれができやすい",s:{wave:2}},
+          {t:"位置は普通だが、骨っぽさを感じる",s:{natural:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"下腹部やお腹まわりの特徴に近いのは？",
+        options:[
+          {t:"みぞおち付近に厚みが出やすい",s:{straight:2}},
+          {t:"下腹部やお尻に脂肪がつきやすい",s:{wave:2}},
+          {t:"お腹まわりは薄いが、骨格でしっかり見える",s:{natural:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"直感で、自分の骨格の雰囲気に近いのは？",
+        options:[
+          {t:"ハリのある、芯が通った雰囲気",s:{straight:3}},
+          {t:"華奢で、丸みのある雰囲気",s:{wave:3}},
+          {t:"しっかりした骨格で、スタイリッシュな雰囲気",s:{natural:3}}
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    key:"taste",
+    label:"PART 4 ― テイスト診断",
+    questions:[
+
+      {
+        type:"choice",
+        q:"普段よく選ぶボトムスは？",
+        options:[
+          {t:"デニムパンツ",s:{casual:2}},
+          {t:"細身のきれいめパンツ",s:{clean:2}},
+          {t:"ワイドパンツやカーゴパンツ",s:{street:2}},
+          {t:"古着のヴィンテージパンツやマキシスカート",s:{vintage:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"どんな場面で着る服を探していますか？",
+        options:[
+          {t:"休日のリラックスした外出",s:{casual:2}},
+          {t:"オフィスや改まった場",s:{clean:2}},
+          {t:"友人と個性を楽しむ日",s:{street:2}},
+          {t:"古着屋巡りやレトロな時間",s:{vintage:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"直感で好きなスタイルはどれですか？",
+        options:[
+          {t:"カジュアル ― Tシャツ、デニム、パーカーなど",s:{casual:3}},
+          {t:"きれいめ ― シャツ、ブラウス、ローファーなど",s:{clean:3}},
+          {t:"ストリート ― オーバーサイズ、黒やモノトーンなど",s:{street:3}},
+          {t:"古着系 ― 年代物や一点物の風合い",s:{vintage:3}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"普段のアクセサリーについては？",
+        options:[
+          {t:"ほとんどつけない",s:{casual:2}},
+          {t:"華奢で上品なものを一点だけ",s:{clean:2}},
+          {t:"存在感のあるものを重ねづけ",s:{street:2}},
+          {t:"古着屋で見つけたビンテージ小物",s:{vintage:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"髪色・髪型のイメージに近いのは？",
+        options:[
+          {t:"黒髪でナチュラルなヘアスタイル",s:{casual:2}},
+          {t:"上品なストレートやまとめ髪",s:{clean:2}},
+          {t:"明るめカラーやパーマでこなれ感を出す",s:{street:2}},
+          {t:"レトロな巻き髪やマッシュスタイル",s:{vintage:2}}
+        ]
+      },
+
+      {
+        type:"choice",
+        q:"肌の露出について、近いのは？",
+        options:[
+          {t:"二の腕や膝下など、軽い露出はOK",s:{casual:2}},
+          {t:"露出は控えめが好き",s:{clean:2}},
+          {t:"際どい丈やビッグシルエットで抜け感を出したい",s:{street:2}},
+          {t:"露出よりも古着ならではの個性を優先したい",s:{vintage:2}}
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    key:"accessory",
+    label:"PART 5 ― アクセサリー・小物",
+    questions: [
+
+      {
+        type:"accessory",
+        key:"necklace",
+        q:"どんなネックレスをつけますか？"
+      },
+
+      {
+        type:"accessory",
+        key:"ring",
+        q:"どんな指輪をつけますか？"
+      },
+
+      {
+        type:"accessory",
+        key:"piercing",
+        q:"どんなピアス・イヤリングをつけますか？"
+      },
+
+      {
+        type:"accessory",
+        key:"bracelet",
+        q:"ブレスレット・腕時計はどんなものをつけますか？"
+      },
+
+      {
+        type:"accessory",
+        key:"shoes",
+        q:"普段どんな靴を履きますか？"
+      },
+
+      {
+        type:"accessory",
+        key:"bag",
+        q:"普段どんなバッグを使いますか？"
+      }
+
+    ]
+  }
+
+];
+
+
+/* =========================================================
+   FLAT QUESTIONS
+========================================================= */
+
+const FLAT = [];
+
+SECTIONS.forEach(sec=>{
+  sec.questions.forEach(q=>{
+    FLAT.push({
+      section:sec,
+      q:q
+    });
+  });
+});
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let current = 0;
+let gender = null;
+let age = null;
+let diagnosisMode = null;
+let preferredColor = null;
+let apiKey = null;
+let photoAnalysis = null;
+let photoGender = "指定しない";
+
+const history = [];
+
+const accessoryAnswers = {
+  necklace:null,
+  ring:null,
+  piercing:null,
+  bracelet:null,
+  shoes:null,
+  bag:null
+};
+
+const photos = {
+  face:null,
+  full:null
+};
+
+const scores = {
+
+  spring:0,
+  summer:0,
+  autumn:0,
+  winter:0,
+
+  straight:0,
+  wave:0,
+  natural:0,
+
+  casual:0,
+  clean:0,
+  street:0,
+  vintage:0
+
+};
+
+const card = document.getElementById("card");
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function renderHome(){
+
+  diagnosisMode = null;
+
+  card.innerHTML = `
+
+    <div class="home">
+
+      <h2>STYLE COMPASS</h2>
+
+      <p class="home-lead">
+        パーソナルカラー・骨格・テイスト・アクセサリー・
+        靴・バッグから、あなたらしいスタイルを見つけます。
+      </p>
+
+      <div class="home-options">
+
+        <button class="home-option" id="photo-mode">
+
+          <div class="home-icon">📷</div>
+
+          <div>
+            <h3>写真で診断</h3>
+            <p>
+              写真に写っている服を見つけて、
+              似た系統の服も紹介します（質問なし）。
+            </p>
+          </div>
+
+          <div class="home-arrow">›</div>
+
+        </button>
+
+
+        <button class="home-option" id="question-mode">
+
+          <div class="home-icon">✦</div>
+
+          <div>
+            <h3>質問で診断</h3>
+            <p>
+              質問に答えながら、
+              パーソナルカラー・骨格・テイストなどを診断します。
+            </p>
+          </div>
+
+          <div class="home-arrow">›</div>
+
+        </button>
+
+      </div>
+
+      <p class="home-note">
+        ※パーソナルカラー・骨格などの診断は「質問で診断」で行えます。
+      </p>
+
+    </div>
+  `;
+
+
+  document
+    .getElementById("photo-mode")
+    .addEventListener("click",()=>{
+      diagnosisMode="photo";
+      renderPhotoScreen();
+    });
+
+
+  document
+    .getElementById("question-mode")
+    .addEventListener("click",()=>{
+      diagnosisMode="question";
+      renderGenderScreen();
+    });
+
+}
+
+
+/* =========================================================
+   PHOTO SCREEN
+========================================================= */
+
+function renderPhotoScreen(){
+
+  card.innerHTML = `
+
+    <div class="quiz-nav">
+      <button class="back-btn" id="photo-back">← ホームに戻る</button>
+    </div>
+
+    <div class="part-label">写真で診断</div>
+
+    <div class="question">
+
+      <h2>服が写っている写真を用意してください</h2>
+
+      <p class="photo-intro">
+        写真に写っている服を見つけて、似た系統の服を紹介します。
+        全身が写る写真がおすすめです（1枚だけでもOK）。
+      </p>
+
+      <div class="photo-grid">
+
+        <!-- FACE -->
+
+        <div class="photo-box">
+
+          <h3>顔まわりの写真（任意）</h3>
+
+          <p>トップスや首元が見える写真</p>
+
+          <div class="photo-preview" id="face-preview">
+            写真を選択してください
+          </div>
+
+          <div class="photo-actions">
+
+            <label class="photo-btn">
+              📷 カメラで撮影
+              <input
+                class="photo-file"
+                id="face-camera"
+                type="file"
+                accept="image/*"
+                capture="user"
+              >
+            </label>
+
+            <label class="photo-btn secondary">
+              🖼 写真を選ぶ
+              <input
+                class="photo-file"
+                id="face-file"
+                type="file"
+                accept="image/*"
+              >
+            </label>
+
+          </div>
+
+          <div class="photo-status" id="face-status"></div>
+
+        </div>
+
+
+        <!-- FULL BODY -->
+
+        <div class="photo-box">
+
+          <h3>全身写真（おすすめ）</h3>
+
+          <p>頭から靴まで写る写真</p>
+
+          <div class="photo-preview" id="full-preview">
+            写真を選択してください
+          </div>
+
+          <div class="photo-actions">
+
+            <label class="photo-btn">
+              📷 カメラで撮影
+              <input
+                class="photo-file"
+                id="full-camera"
+                type="file"
+                accept="image/*"
+                capture="environment"
+              >
+            </label>
+
+            <label class="photo-btn secondary">
+              🖼 写真を選ぶ
+              <input
+                class="photo-file"
+                id="full-file"
+                type="file"
+                accept="image/*"
+              >
+            </label>
+
+          </div>
+
+          <div class="photo-status" id="full-status"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="ai-note">
+        <strong>AIによる写真の解析について</strong><br>
+        選んだ写真は、服を見分けるためにAI（Claude）へ送信されます。
+        服以外（顔・体型など）は解析しません。
+        他の人の顔が写っている写真は避けてください。
+
+        <details class="api-box">
+          <summary>claude.ai以外で開いている場合：APIキーの設定</summary>
+          <input
+            type="password"
+            id="api-key"
+            placeholder="sk-ant-..."
+            autocomplete="off"
+          >
+          <p>
+            claude.aiのプレビュー内ではキーは不要です。
+            それ以外の環境ではAnthropicのAPIキーを入力してください
+            （このページを閉じると消えます。他人に公開するサイトでは、
+            キーをブラウザに置かずサーバー経由にしてください）。
+          </p>
+        </details>
+      </div>
+
+
+      <button class="primary-btn" id="photo-next">
+        写真から服を探す
+      </button>
+
+    </div>
+  `;
+
+
+  setupPhotoInput(
+    "face-camera",
+    "face"
+  );
+
+  setupPhotoInput(
+    "face-file",
+    "face"
+  );
+
+  setupPhotoInput(
+    "full-camera",
+    "full"
+  );
+
+  setupPhotoInput(
+    "full-file",
+    "full"
+  );
+
+
+  document
+    .getElementById("photo-back")
+    .addEventListener("click",renderHome);
+
+
+  document
+    .getElementById("photo-next")
+    .addEventListener("click",()=>{
+
+      if(!photos.face && !photos.full){
+
+        alert(
+          "顔写真または全身写真を1枚以上選択してください。"
+        );
+
+        return;
+      }
+
+      const keyInput=
+        document.getElementById("api-key");
+
+      if(keyInput && keyInput.value.trim()){
+        apiKey=keyInput.value.trim();
+      }
+
+      analyzePhotos();
+
+    });
+
+}
+
+
+function setupPhotoInput(id,type){
+
+  const input=document.getElementById(id);
+
+  input.addEventListener("change",event=>{
+
+    const file=event.target.files[0];
+
+    if(!file) return;
+
+    if(!file.type.startsWith("image/")){
+
+      alert("画像ファイルを選択してください。");
+
+      return;
+    }
+
+    const reader=new FileReader();
+
+    reader.onload=()=>{
+
+      photos[type]=reader.result;
+
+      const preview=
+        document.getElementById(
+          type==="face"
+            ? "face-preview"
+            : "full-preview"
+        );
+
+      preview.innerHTML=
+        `<img src="${reader.result}" alt="${type} photo">`;
+
+      document.getElementById(
+        type==="face"
+          ? "face-status"
+          : "full-status"
+      ).textContent="✓ 写真を読み込みました";
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+
+/* =========================================================
+   PHOTO ANALYSIS (写真に写っている服 + 似た系統の服)
+========================================================= */
+
+function esc(str){
+  return String(str==null?"":str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;");
+}
+
+function shrinkImage(dataUrl,max=1280){
+
+  return new Promise((resolve,reject)=>{
+
+    const img=new Image();
+
+    img.onload=()=>{
+
+      const ratio=
+        Math.min(1,max/Math.max(img.width,img.height));
+
+      const canvas=document.createElement("canvas");
+
+      canvas.width=Math.round(img.width*ratio);
+      canvas.height=Math.round(img.height*ratio);
+
+      canvas
+        .getContext("2d")
+        .drawImage(img,0,0,canvas.width,canvas.height);
+
+      resolve(
+        canvas.toDataURL("image/jpeg",0.85).split(",")[1]
+      );
+
+    };
+
+    img.onerror=()=>reject(
+      new Error("画像を読み込めませんでした。別の写真でお試しください。")
+    );
+
+    img.src=dataUrl;
+
+  });
+
+}
+
+const PHOTO_PROMPT=`この写真に写っている「服・靴・バッグ・小物」だけを見て、ファッション提案をしてください。
+人物の顔・年齢・性別・体型・人種などは判断も言及もしないでください。
+
+次のJSONだけを出力してください（前置き・コードブロックは不要）。
+{
+  "summary":"服全体の雰囲気を40字以内で",
+  "worn":[
+    {"part":"トップス|アウター|ボトムス|シューズ|バッグ|小物","name":"写っているアイテム名（例：オーバーサイズのデニムジャケット）","color":"色（例：ネイビー）","search":"ZOZOTOWNで探すための日本語キーワード2〜4語（色を含める）"}
+  ],
+  "similar":[
+    {"name":"似た系統のおすすめアイテム名","brand":"確実に知っている定番ブランドのみ。不明なら空文字","why":"おすすめ理由を40字以内で","search":"ZOZOTOWNで探すための日本語キーワード2〜4語"}
+  ]
+}
+
+ルール：
+- worn は写真で実際に見えるアイテムのみ。最大6件。見えないものは書かない。
+- similar は写真と同じ系統・雰囲気の別アイテムを3〜4件。wornと同じものは避ける。
+- search にブランド名は、ロゴが明確に見える場合を除き入れない。
+- 出力はJSONのみ。`;
+
+function extractJson(text){
+
+  const clean=text.replace(/```json|```/g,"").trim();
+
+  const start=clean.indexOf("{");
+  const end=clean.lastIndexOf("}");
+
+  if(start<0 || end<0){
+    throw new Error("AIの返答を読み取れませんでした。");
+  }
+
+  return JSON.parse(clean.slice(start,end+1));
+
+}
+
+async function requestPhotoAnalysis(){
+
+  const content=[];
+
+  for(const key of ["full","face"]){
+
+    if(photos[key]){
+
+      content.push({
+        type:"image",
+        source:{
+          type:"base64",
+          media_type:"image/jpeg",
+          data:await shrinkImage(photos[key])
+        }
+      });
+
+    }
+
+  }
+
+  content.push({type:"text",text:PHOTO_PROMPT});
+
+  const headers={"Content-Type":"application/json"};
+
+  if(apiKey){
+    headers["x-api-key"]=apiKey;
+    headers["anthropic-version"]="2023-06-01";
+    headers["anthropic-dangerous-direct-browser-access"]="true";
+  }
+
+  let response;
+
+  try{
+
+    response=await fetch(
+      "https://api.anthropic.com/v1/messages",
+      {
+        method:"POST",
+        headers,
+        body:JSON.stringify({
+          model:"claude-sonnet-4-6",
+          max_tokens:1000,
+          messages:[{role:"user",content}]
+        })
+      }
+    );
+
+  }catch(e){
+
+    throw new Error(
+      "AIに接続できませんでした。claude.ai以外で開いている場合は、"
+      +"写真の選択画面の「APIキーの設定」にキーを入力してください。"
+    );
+
+  }
+
+  if(!response.ok){
+
+    let detail="";
+
+    try{
+      const body=await response.json();
+      detail=body.error && body.error.message
+        ? body.error.message
+        : "";
+    }catch(e){}
+
+    if(response.status===401){
+      throw new Error("APIキーが正しくないか、設定されていません。");
+    }
+
+    throw new Error(
+      `AIの解析でエラーが発生しました（${response.status}）${detail?"："+detail:""}`
+    );
+
+  }
+
+  const data=await response.json();
+
+  const text=
+    (data.content||[])
+      .map(i=>i.type==="text"?i.text:"")
+      .join("\n");
+
+  const result=extractJson(text);
+
+  result.worn=Array.isArray(result.worn)?result.worn:[];
+  result.similar=Array.isArray(result.similar)?result.similar:[];
+
+  return result;
+
+}
+
+async function analyzePhotos(){
+
+  card.innerHTML=`
+
+    <div class="loading-box">
+
+      <div class="spinner"></div>
+
+      <h2>写真の服を解析しています</h2>
+
+      <p>
+        写っているアイテムと、似た系統の服を探しています。
+        10〜20秒ほどかかる場合があります。
+      </p>
+
+    </div>
+
+  `;
+
+  try{
+
+    photoAnalysis=await requestPhotoAnalysis();
+
+    renderPhotoResult();
+
+  }catch(e){
+
+    renderPhotoError(e.message||"解析に失敗しました。");
+
+  }
+
+}
+
+function renderPhotoError(message){
+
+  card.innerHTML=`
+
+    <div class="error-box">
+      ${esc(message)}
+    </div>
+
+    <button class="primary-btn" id="photo-retry">
+      もう一度試す
+    </button>
+
+    <button class="restart" id="photo-error-back">
+      ← 写真を選び直す
+    </button>
+
+  `;
+
+  document
+    .getElementById("photo-retry")
+    .addEventListener("click",analyzePhotos);
+
+  document
+    .getElementById("photo-error-back")
+    .addEventListener("click",renderPhotoScreen);
+
+}
+
+function photoPrefix(){
+  return (photoGender==="メンズ" || photoGender==="レディース")
+    ? photoGender
+    : "";
+}
+
+function renderPhotoResult(){
+
+  const prefix=photoPrefix();
+  const r=photoAnalysis;
+
+  const wornCards=
+    r.worn
+      .filter(i=>i && i.name && i.search)
+      .map(i=>productCardHtml(
+        {
+          kind:esc(i.part||"アイテム"),
+          brand:"",
+          name:esc(i.name),
+          why:i.color?`色：${esc(i.color)}`:"",
+          q:String(i.search)
+        },
+        prefix
+      ))
+      .join("");
+
+  const similarCards=
+    r.similar
+      .filter(i=>i && i.name && i.search)
+      .map(i=>productCardHtml(
+        {
+          kind:"似た系統のおすすめ",
+          brand:esc(i.brand||""),
+          name:esc(i.name),
+          why:esc(i.why||""),
+          q:String(i.search)
+        },
+        prefix,
+        true
+      ))
+      .join("");
+
+  const thumbs=
+    (photos.full || photos.face)
+      ? `<div class="photo-result">
+          ${photos.full?`<img src="${photos.full}" alt="全身写真">`:""}
+          ${photos.face?`<img src="${photos.face}" alt="顔まわりの写真">`:""}
+        </div>`
+      : "";
+
+  card.innerHTML=`
+
+    <div class="quiz-nav">
+      <button class="back-btn" id="photo-result-back">
+        ← 写真を選び直す
+      </button>
+    </div>
+
+    <h2 class="result-name">写真の服と、似た系統の服</h2>
+
+    ${thumbs}
+
+    ${
+      r.summary
+      ? `<div class="combo-box" style="margin-top:20px;">
+          <h3>写真から見えるスタイル</h3>
+          <p>${esc(r.summary)}</p>
+        </div>`
+      : ""
+    }
+
+    <div class="gender-toggle">
+      <span>探す対象：</span>
+      ${["指定しない","メンズ","レディース"].map(g=>`
+        <button
+          class="toggle-btn${photoGender===g?" active":""}"
+          data-g="${g}"
+        >${g}</button>
+      `).join("")}
+    </div>
+
+    <div class="section-block">
+
+      <h3>写真に写っている服</h3>
+
+      <p class="desc">
+        写真から見つけたアイテムです。
+        ボタンから同じような服をZOZOTOWNなどで探せます。
+      </p>
+
+      ${
+        wornCards
+        ? `<div class="product-grid">${wornCards}</div>`
+        : `<p class="desc">服をはっきり見つけられませんでした。全身が写る明るい写真でお試しください。</p>`
+      }
+
+    </div>
+
+    ${
+      similarCards
+      ? `<div class="section-block">
+
+          <h3>似た系統のおすすめ</h3>
+
+          <p class="desc">
+            写真の雰囲気に近い、別のアイテムです。
+            在庫・価格・カラー展開は時期によって変わります。
+          </p>
+
+          <div class="product-grid">${similarCards}</div>
+
+        </div>`
+      : ""
+    }
+
+    <button class="restart" id="restart">
+      もう一度診断する
+    </button>
+
+  `;
+
+  document
+    .getElementById("photo-result-back")
+    .addEventListener("click",renderPhotoScreen);
+
+  document
+    .getElementById("restart")
+    .addEventListener("click",resetAll);
+
+  card
+    .querySelectorAll(".toggle-btn")
+    .forEach(btn=>{
+
+      btn.addEventListener("click",()=>{
+
+        photoGender=btn.dataset.g;
+
+        renderPhotoResult();
+
+      });
+
+    });
+
+}
+
+/* =========================================================
+   GENDER
+========================================================= */
+
+function renderGenderScreen(){
+
+  card.innerHTML = `
+
+    <div class="quiz-nav">
+      <button class="back-btn" id="gender-back">
+        ← 戻る
+      </button>
+    </div>
+
+    <div class="question">
+
+      <h2>診断したい性別を選んでください</h2>
+
+      <div class="gender-options">
+
+        ${GENDER_OPTIONS.map((g,i)=>`
+
+          <button
+            class="gender-option"
+            data-idx="${i}"
+          >
+            ${g.t}
+          </button>
+
+        `).join("")}
+
+      </div>
+
+    </div>
+  `;
+
+
+  document
+    .getElementById("gender-back")
+    .addEventListener("click",()=>{
+
+      if(diagnosisMode==="photo"){
+        renderPhotoScreen();
+      }else{
+        renderHome();
+      }
+
+    });
+
+
+  card
+    .querySelectorAll(".gender-option")
+    .forEach(btn=>{
+
+      btn.addEventListener("click",()=>{
+
+        gender=
+          GENDER_OPTIONS[
+            parseInt(btn.dataset.idx)
+          ].key;
+
+        current=0;
+
+        renderQuestion();
+
+      });
+
+    });
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function renderProgress(sectionLabel){
+
+  let html=`
+    <div class="part-label">
+      ${sectionLabel}
+    </div>
+
+    <div class="stitch-track">
+  `;
+
+  FLAT.forEach((_,i)=>{
+
+    html+=`
+      <div class="stitch ${
+        i<current ? "done" : ""
+      }"></div>
+    `;
+
+  });
+
+  html+=`
+    </div>
+
+    <div class="progress-label">
+      ${current+1} / ${FLAT.length}
+    </div>
+  `;
+
+  return html;
+
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+function renderQuestion(){
+
+  const {section,q}=FLAT[current];
+
+  let html=`
+
+    <div class="quiz-nav">
+
+      <button
+        class="back-btn"
+        id="back-btn"
+      >
+        ← 戻る
+      </button>
+
+    </div>
+
+    ${renderProgress(section.label)}
+
+    <div class="question">
+
+      <h2>${q.q}</h2>
+  `;
+
+
+  /* AGE */
+
+  if(q.type==="age"){
+
+    html+=`
+
+      <div class="input-box">
+
+        <label for="age-input">
+          年齢
+        </label>
+
+        <input
+          id="age-input"
+          type="number"
+          min="10"
+          max="100"
+          placeholder="例：25"
+        >
+
+        <button
+          class="primary-btn"
+          id="age-next"
+        >
+          次へ
+        </button>
+
+      </div>
+    `;
+
+  }
+
+
+  /* SWATCH */
+
+  else if(q.type==="swatch"){
+
+    html+=`<div class="swatch-grid">`;
+
+    q.options.forEach((opt,idx)=>{
+
+      html+=`
+
+        <button
+          class="swatch-option"
+          data-idx="${idx}"
+        >
+
+          <span
+            class="swatch-circle"
+            style="background:${opt.bg||opt.color};"
+          ></span>
+
+          <span class="label">
+            ${opt.t}
+          </span>
+
+        </button>
+      `;
+
+    });
+
+    html+=`</div>`;
+
+  }
+
+
+  /* ACCESSORY */
+
+  else if(q.type==="accessory"){
+
+    const data=ACCESSORY_TYPES[q.key];
+
+    html+=`
+
+      <div class="options">
+
+        ${data.options.map((opt,idx)=>`
+
+          <button
+            class="option accessory-option"
+            data-idx="${idx}"
+          >
+
+            <span class="dot"></span>
+
+            ${opt}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+    `;
+
+  }
+
+
+  /* NORMAL */
+
+  else{
+
+    html+=`<div class="options">`;
+
+    q.options.forEach((opt,idx)=>{
+
+      html+=`
+
+        <button
+          class="option"
+          data-idx="${idx}"
+        >
+
+          <span class="dot"></span>
+
+          ${opt.t}
+
+        </button>
+
+      `;
+
+    });
+
+    html+=`</div>`;
+
+  }
+
+
+  html+=`
+    </div>
+  `;
+
+  card.innerHTML=html;
+
+
+  /* BACK */
+
+  document
+    .getElementById("back-btn")
+    .addEventListener("click",()=>{
+
+      if(current===0){
+
+        renderGenderScreen();
+
+        return;
+      }
+
+      current--;
+
+      const last=history.pop();
+
+      if(last && last.score){
+        subtractScore(last.score);
+      }
+
+      if(last && last.accessoryKey){
+
+        accessoryAnswers[
+          last.accessoryKey
+        ]=last.previousAccessory;
+
+      }
+
+      if(last && last.colorPref){
+
+        preferredColor=last.previousColor;
+
+      }
+
+      if(last && last.ageValue!==undefined){
+
+        age=last.previousAge;
+
+      }
+
+      renderQuestion();
+
+    });
+
+
+  /* AGE */
+
+  if(q.type==="age"){
+
+    document
+      .getElementById("age-next")
+      .addEventListener("click",()=>{
+
+        const value=
+          parseInt(
+            document.getElementById("age-input").value
+          );
+
+        if(
+          !value ||
+          value<10 ||
+          value>100
+        ){
+
+          alert("10〜100歳の範囲で入力してください。");
+
+          return;
+        }
+
+        const previousAge=age;
+
+        age=value;
+
+        history.push({
+          score:{},
+          ageValue:value,
+          previousAge:previousAge
+        });
+
+        current++;
+
+        if(current<FLAT.length){
+          renderQuestion();
+        }else{
+          renderResult();
+        }
+
+      });
+
+    return;
+
+  }
+
+
+  /* ANSWERS */
+
+  const selector=
+    q.type==="swatch"
+      ? ".swatch-option"
+      : ".option";
+
+
+  card
+    .querySelectorAll(selector)
+    .forEach(btn=>{
+
+      btn.addEventListener("click",()=>{
+
+        const idx=
+          parseInt(btn.dataset.idx);
+
+        if(q.type==="accessory"){
+
+          const data=
+            ACCESSORY_TYPES[q.key];
+
+          const previous=
+            accessoryAnswers[q.key];
+
+          accessoryAnswers[q.key]=
+            data.options[idx];
+
+          history.push({
+
+            score:{},
+
+            accessoryKey:q.key,
+
+            previousAccessory:previous
+
+          });
+
+        }else if(q.pref){
+
+          const previousColor=
+            preferredColor;
+
+          preferredColor=
+            q.options[idx].t;
+
+          history.push({
+            score:{},
+            colorPref:true,
+            previousColor:previousColor
+          });
+
+        }else{
+
+          const opt=q.options[idx];
+
+          addScore(opt.s);
+
+          history.push({
+            score:opt.s
+          });
+
+        }
+
+
+        current++;
+
+
+        if(current<FLAT.length){
+
+          renderQuestion();
+
+        }else{
+
+          renderResult();
+
+        }
+
+      });
+
+    });
+
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+function addScore(map){
+
+  Object.entries(map).forEach(([key,value])=>{
+
+    scores[key]+=value;
+
+  });
+
+}
+
+
+function subtractScore(map){
+
+  Object.entries(map).forEach(([key,value])=>{
+
+    scores[key]-=value;
+
+  });
+
+}
+
+
+function topOf(keys){
+
+  return keys
+    .map(key=>[key,scores[key]])
+    .sort((a,b)=>b[1]-a[1]);
+
+}
+
+
+function barGroup(sortedEntries,typesMap){
+
+  const total=
+    sortedEntries.reduce(
+      (a,[,v])=>a+v,
+      0
+    ) || 1;
+
+  let html=`
+    <div class="bars">
+  `;
+
+  sortedEntries.forEach(([key,val])=>{
+
+    const pct=
+      Math.round(
+        (val/total)*100
+      );
+
+    html+=`
+
+      <div class="bar-row">
+
+        <div class="bar-label">
+          ${typesMap[key].name}
+        </div>
+
+        <div class="bar-track">
+
+          <div
+            class="bar-fill"
+            style="
+              width:${pct}%;
+              background:${typesMap[key].barColor};
+            "
+          ></div>
+
+        </div>
+
+        <div class="bar-pct">
+          ${pct}%
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  html+=`</div>`;
+
+  return html;
+
+}
+
+
+/* =========================================================
+   AI STYLE RECOMMENDATION DEMO
+========================================================= */
+
+function createAIRecommendations(
+  colorKey,
+  skeletonKey,
+  tasteKey
+){
+
+  const recommendations=[];
+
+  const colorName=
+    COLOR_TYPES[colorKey].name;
+
+  const skeletonName=
+    SKELETON_TYPES[skeletonKey].name;
+
+  const tasteName=
+    TASTE_TYPES[tasteKey].name;
+
+
+  /* TOP */
+
+  if(skeletonKey==="straight"){
+    recommendations.push(
+      "ハリのあるシンプルなトップス"
+    );
+  }else if(skeletonKey==="wave"){
+    recommendations.push(
+      "柔らかい素材のブラウス・トップス"
+    );
+  }else{
+    recommendations.push(
+      "ゆったりした厚手素材のトップス"
+    );
+  }
+
+
+  /* BOTTOM */
+
+  if(skeletonKey==="straight"){
+    recommendations.push(
+      "すっきりしたストレートパンツ"
+    );
+  }else if(skeletonKey==="wave"){
+    recommendations.push(
+      "ハイウエストのフレア・ワイドボトム"
+    );
+  }else{
+    recommendations.push(
+      "ワイドパンツ・カーゴパンツ"
+    );
+  }
+
+
+  /* TASTE */
+
+  if(tasteKey==="casual"){
+    recommendations.push(
+      "無地Tシャツ＋デニム"
+    );
+  }
+
+  if(tasteKey==="clean"){
+    recommendations.push(
+      "シャツ＋ローファー"
+    );
+  }
+
+  if(tasteKey==="street"){
+    recommendations.push(
+      "オーバーサイズのアウター"
+    );
+  }
+
+  if(tasteKey==="vintage"){
+    recommendations.push(
+      "ヴィンテージ柄のシャツ"
+    );
+  }
+
+
+  /* COLOR */
+
+  recommendations.push(
+    `${colorName}系の差し色`
+  );
+
+
+  return recommendations;
+
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+function renderResult(){
+
+  const colorSorted=
+    topOf([
+      "spring",
+      "summer",
+      "autumn",
+      "winter"
+    ]);
+
+  const skeletonSorted=
+    topOf([
+      "straight",
+      "wave",
+      "natural"
+    ]);
+
+  const tasteSorted=
+    topOf([
+      "casual",
+      "clean",
+      "street",
+      "vintage"
+    ]);
+
+
+  const colorKey=
+    colorSorted[0][0];
+
+  const skeletonKey=
+    skeletonSorted[0][0];
+
+  const tasteKey=
+    tasteSorted[0][0];
+
+
+  const color=
+    COLOR_TYPES[colorKey];
+
+  const skeleton=
+    SKELETON_TYPES[skeletonKey];
+
+  const taste=
+    TASTE_TYPES[tasteKey];
+
+
+  const paletteHtml=
+    color.palette
+      .map(
+        c=>`<span style="background:${c};"></span>`
+      )
+      .join("");
+
+
+  const skeletonItems=
+    skeleton.items
+      .map(i=>`<li>${i}</li>`)
+      .join("");
+
+
+  const tasteItems=
+    taste.items
+      .map(i=>`<li>${i.name}</li>`)
+      .join("");
+
+
+  const aiRecommendations=
+    createAIRecommendations(
+      colorKey,
+      skeletonKey,
+      tasteKey
+    );
+
+
+  const accessoryRows=
+    Object.entries(accessoryAnswers)
+      .filter(([,value])=>value)
+      .map(([key,value])=>{
+
+        const title=
+          ACCESSORY_TYPES[key].title;
+
+        return `
+
+          <div class="recommend-item">
+
+            <small>${title}</small>
+
+            <strong>${value}</strong>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+
+  const photoHtml=
+    (photos.face || photos.full)
+      ? `
+
+        <div class="section-block">
+
+          <h3>写真を使ったスタイリング参考</h3>
+
+          <p class="desc">
+            選択した写真を、スタイリング提案の参考情報として保存しています。
+          </p>
+
+          <div class="photo-result">
+
+            ${
+              photos.face
+              ? `<img src="${photos.face}" alt="顔写真">`
+              : ""
+            }
+
+            ${
+              photos.full
+              ? `<img src="${photos.full}" alt="全身写真">`
+              : ""
+            }
+
+          </div>
+
+        </div>
+
+      `
+      : "";
+
+
+  const aiCards=
+    aiRecommendations
+      .map(item=>`
+
+        <div class="recommend-item">
+
+          <small>スタイル提案</small>
+
+          <strong>${item}</strong>
+
+        </div>
+
+      `)
+      .join("");
+
+
+  const sexLabel=
+    gender
+      ? `<span class="chip">対象: ${gender}</span>`
+      : "";
+
+
+  const productCards=
+    createProductCards(
+      tasteKey,
+      skeletonKey,
+      skeleton.name
+    );
+
+  const ctaQuery=
+    [
+      genderPrefix(),
+      TASTE_SEARCH_WORD[tasteKey],
+      pickedColor()
+    ]
+    .filter(Boolean)
+    .join(" ");
+
+  const colorKeywordText=
+    pickedColor() || COLOR_KEYWORD[colorKey];
+
+  const colorSourceText=
+    pickedColor()
+      ? `選んだ色（${pickedColor()}）`
+      : `診断カラー（${COLOR_KEYWORD[colorKey]}系）`;
+
+
+  card.innerHTML=`
+
+    <h2 class="result-name">
+      あなたの診断結果
+    </h2>
+
+
+    <div class="chips">
+
+      ${sexLabel}
+
+      ${
+        age
+        ? `<span class="chip">年齢: ${age}歳</span>`
+        : ""
+      }
+
+      <span class="chip">
+        パーソナルカラー: ${color.name}
+      </span>
+
+      ${
+        pickedColor()
+        ? `<span class="chip">希望カラー: ${pickedColor()}</span>`
+        : ""
+      }
+
+      <span class="chip">
+        骨格: ${skeleton.name}
+      </span>
+
+      <span class="chip">
+        テイスト: ${taste.name}
+      </span>
+
+    </div>
+
+
+    <a
+      class="zozo-cta"
+      href="${zozoUrl(ctaQuery)}"
+      target="_blank"
+      rel="noopener"
+    >
+      <strong>ZOZOTOWNで診断結果に合うアイテムを見る</strong>
+      <span>${taste.name}${pickedColor()?"・"+pickedColor():""}のアイテムをZOZOTOWNで検索します（新しいタブで開きます）</span>
+    </a>
+
+
+    <div class="combo-box">
+
+      <h3>
+        ${color.name} ×
+        ${skeleton.name} ×
+        ${taste.name}
+      </h3>
+
+      <p>
+        ${color.desc}
+        ${SKELETON_TYPES[skeletonKey].desc}
+        ${taste.name}のアイテムを組み合わせることで、
+        自分らしいスタイルを作りやすくなります。
+      </p>
+
+    </div>
+
+
+    <!-- AI -->
+
+    <div class="section-block">
+
+      <h3>
+        あなた向けスタイリング提案
+      </h3>
+
+      <p class="desc">
+        診断結果とあなたが選んだアイテムをもとにした
+        スタイリング案です。
+      </p>
+
+      <div class="recommend-grid">
+
+        ${aiCards}
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="section-block">
+
+      <h3>
+        あなたへのおすすめ商品
+      </h3>
+
+      <p class="desc">
+        ${color.name} × ${skeleton.name} × ${taste.name}
+        の診断結果から、具体的なアイテムを選びました。
+        ボタンを押すとZOZOTOWNなどの検索結果が開きます。
+        在庫・価格・カラー展開は時期によって変わります。
+      </p>
+
+      <div class="product-grid">
+
+        ${productCards}
+
+      </div>
+
+      <p class="color-hint">
+        ${
+          pickedColor()
+          ? `選んだ「${pickedColor()}」は各カードの「${pickedColor()}で探す」から探せます。
+             あわせて、診断結果の「${color.name}」に合う色（${COLOR_KEYWORD[colorKey]}系など）も取り入れると、より似合いやすくなります。`
+          : `カラーは診断結果の「${color.name}」に合わせて、
+             ${COLOR_KEYWORD[colorKey]}系の色を選ぶとより似合いやすくなります。`
+        }
+      </p>
+
+    </div>
+
+
+    <!-- COLOR -->
+
+    <div class="section-block">
+
+      <h3>
+        パーソナルカラー ― ${color.name}
+      </h3>
+
+      <p class="desc">
+        ${color.desc}
+      </p>
+
+      <h4>
+        似合う配色イメージ
+      </h4>
+
+      <div class="palette">
+        ${paletteHtml}
+      </div>
+
+      ${barGroup(
+        colorSorted,
+        COLOR_TYPES
+      )}
+
+    </div>
+
+
+    <!-- SKELETON -->
+
+    <div class="section-block">
+
+      <h3>
+        骨格タイプ ― ${skeleton.name}
+      </h3>
+
+      <p class="desc">
+        ${skeleton.desc}
+      </p>
+
+      <h4>
+        取り入れたいアイテム
+      </h4>
+
+      <ul>
+        ${skeletonItems}
+      </ul>
+
+      ${barGroup(
+        skeletonSorted,
+        SKELETON_TYPES
+      )}
+
+    </div>
+
+
+    <!-- TASTE -->
+
+    <div class="section-block">
+
+      <h3>
+        テイスト ― ${taste.name}
+      </h3>
+
+      <p class="desc">
+        ${taste.desc}
+      </p>
+
+      <h4>
+        取り入れたいアイテム
+      </h4>
+
+      <ul>
+        ${tasteItems}
+      </ul>
+
+      ${barGroup(
+        tasteSorted,
+        TASTE_TYPES
+      )}
+
+    </div>
+
+
+    <!-- ACCESSORIES -->
+
+    ${
+      accessoryRows
+      ? `
+
+        <div class="section-block">
+
+          <h3>
+            あなたが選んだアクセサリー・小物
+          </h3>
+
+          <p class="desc">
+            普段の好みとして回答したアイテムです。
+            AIスタイリングを実装する場合、
+            これらの好みも提案条件として利用できます。
+          </p>
+
+          <div class="recommend-grid">
+
+            ${accessoryRows}
+
+          </div>
+
+        </div>
+
+      `
+      : ""
+    }
+
+
+    <!-- PHOTOS -->
+
+    ${photoHtml}
+
+
+    <!-- SHOP -->
+
+    <div class="shop-block">
+
+      <h3>
+        もっとアイテムを探す
+      </h3>
+
+      <p class="desc">
+        ${colorSourceText}を加えて、
+        テイストに合うアイテムをZOZOTOWN・楽天で探せます。
+      </p>
+
+
+      ${createShopRows(
+        colorKey,
+        taste
+      )}
+
+    </div>
+
+
+    <button
+      class="restart"
+      id="restart"
+    >
+      もう一度診断する
+    </button>
+
+  `;
+
+
+  document
+    .getElementById("restart")
+    .addEventListener(
+      "click",
+      resetAll
+    );
+
+}
+
+
+/* =========================================================
+   SHOP LINKS
+========================================================= */
+
+function createShopRows(
+  colorKey,
+  taste
+){
+
+  const colorKeyword=
+    pickedColor() || COLOR_KEYWORD[colorKey];
+
+  return taste.items
+    .map(item=>{
+
+      const keyword=
+        [
+          genderPrefix(),
+          item.name,
+          colorKeyword
+        ]
+        .filter(Boolean)
+        .join(" ");
+
+      return `
+
+        <div class="shop-item">
+
+          <div class="shop-item-name">
+            ${item.name}
+          </div>
+
+          <div class="shop-links">
+
+            <a
+              class="shop-link zozo"
+              href="${zozoUrl(keyword)}"
+              target="_blank"
+              rel="noopener"
+            >
+              ZOZOTOWNで探す
+            </a>
+
+            <a
+              class="shop-link"
+              href="${rakutenUrl(keyword)}"
+              target="_blank"
+              rel="noopener"
+            >
+              楽天で探す
+            </a>
+
+          </div>
+
+        </div>
+
+      `;
+
+    })
+    .join("");
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetAll(){
+
+  current=0;
+  gender=null;
+  age=null;
+  diagnosisMode=null;
+  preferredColor=null;
+  photoAnalysis=null;
+  photoGender="指定しない";
+
+  history.length=0;
+
+  Object.keys(scores)
+    .forEach(key=>{
+      scores[key]=0;
+    });
+
+
+  Object.keys(accessoryAnswers)
+    .forEach(key=>{
+      accessoryAnswers[key]=null;
+    });
+
+
+  photos.face=null;
+  photos.full=null;
+
+
+  renderHome();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+renderHome();
+
+</script>
+
+</body>
+</html>
